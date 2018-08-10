@@ -12,9 +12,10 @@
     <style>
         body { margin: 0; }
         .organization__container { margin: 5rem auto 0; max-width: 666px; text-align: center; }
-        .repositories__container { margin-top: 5rem; }
-        .repositories__container .repository { word-wrap: break-word; }
+        .repositories__container { margin-top: 5rem; flex-flow: wrap; }
+        .repositories__container .repository { word-wrap: break-word; margin-bottom: 2rem; }
         .repositories__container .repository .repository__description { margin-bottom: 2rem; overflow: hidden; text-overflow: ellipsis; height: 3.2em; /* 2x line-height */ }
+        .repositories__container .repository .repository__description.missing { font-style: italic; }
     </style>
 </head>
 <body>
@@ -71,8 +72,8 @@
               repoEl.appendChild(nameEl)
 
               let descriptionEl = document.createElement('p')
-              descriptionEl.className = 'repository__description'
-              descriptionEl.innerHTML = repo.description
+              descriptionEl.className = 'repository__description' + (!repo.description ? ' missing' : '')
+              descriptionEl.innerHTML = repo.description || 'No description'
               repoEl.appendChild(descriptionEl)
 
               let buttonEl = document.createElement('a')
